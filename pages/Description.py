@@ -32,7 +32,6 @@ def calculate_rfm(data):
 def main():
     st.title('RFM Analysis for Air Quality')
 
-    # Upload file CSV dengan data kualitas udara
     uploaded_file = st.file_uploader("Upload CSV file", type=['csv'])
     if uploaded_file is not None:
         data = pd.read_csv(uploaded_file)
@@ -40,31 +39,26 @@ def main():
         st.subheader('Data Sample')
         st.write(data.head())
 
-        # Hitung RFM Analysis
         rfm_data = calculate_rfm(data)
 
         if rfm_data is not None:
             st.subheader('RFM Analysis Results')
             st.write(rfm_data)
 
-            # Visualisasi
             st.subheader('RFM Analysis Visualization')
 
-            # Plot Recency
             plt.bar(rfm_data['Location'], rfm_data['Recency'])
             plt.xlabel('Location')
             plt.ylabel('Recency (Days)')
             plt.title('Recency of Air Quality Measurements')
             st.pyplot()
 
-            # Plot Frequency
             plt.bar(rfm_data['Location'], rfm_data['Frequency'])
             plt.xlabel('Location')
             plt.ylabel('Frequency')
             plt.title('Frequency of Air Quality Measurements')
             st.pyplot()
 
-            # Plot Monetary
             plt.bar(rfm_data['Location'], rfm_data['Monetary'])
             plt.xlabel('Location')
             plt.ylabel('Monetary (PM2.5)')
